@@ -7,8 +7,9 @@ export default function BasicLayout(props) {
     return (
         <Fragment>
             <Container fluid className="basic-layout">
-                <div>Menu</div>
-                {children}
+                <Container className="basic-layout-content">
+                    {children}
+                </Container>
             </Container>
         </Fragment>
     );
