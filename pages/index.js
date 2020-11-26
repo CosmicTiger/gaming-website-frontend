@@ -1,12 +1,11 @@
 import React from 'react';
-import { Button, Icon } from 'semantic-ui-react';
+
+import BasicLayout from '../layouts/BasicLayout';
 
 export default function Home() {
   return (
-    <div className={"Home"}>
-      <h1>Estamos en Next.JS</h1>
-      <Button>Example</Button>
-      <Icon name="home" />
-    </div>
+    <BasicLayout>
+      <h1>Estamos en Home Page</h1>
+    </BasicLayout>
   )
 }
