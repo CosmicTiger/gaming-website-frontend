@@ -4,5 +4,10 @@
 // Base Imports
 @import 'base/base';
 
+// Components Imports\
+@import 'components/header/header';
+@import 'components/topbar/topbar';
+@import 'components/menu/menu';
+
 // Layouts Imports
 @import 'layouts/basic-layout/basic-layout';

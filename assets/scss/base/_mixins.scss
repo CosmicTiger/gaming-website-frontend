@@ -1,0 +1,23 @@
+@mixin boxShadow-property-compatibility ($boxShadowValue) {
+    -moz-box-shadow: $boxShadowValue;
+    -ms-box-shadow: $boxShadowValue;
+    -o-box-shadow: $boxShadowValue;
+    -webkit-box-shadow: $boxShadowValue;
+    box-shadow: $boxShadowValue;
+}
+
+@mixin transition-property-compatibility ($transition: all 0.2s ease) {
+    -moz-transition: $transition;
+    -ms-transition: $transition;
+    -o-transition: $transition;
+    -webkit-transition: $transition;
+    transition: $transition;
+}
+
+@mixin transform-property-compatibility ($transform) {
+    -moz-transform: $transform;
+    -ms-transform: $transform;
+    -o-transform: $transform;
+    -webkit-transform: $transform;
+    transform: $transform;
+}
