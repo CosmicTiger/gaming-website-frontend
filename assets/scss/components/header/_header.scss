@@ -1,0 +1,5 @@
+.Header {
+    @include boxShadow-property-compatibility(0 -10px 10px 15px rgba($color: $background-dark-absolute, $alpha: 0.5));
+    position: relative;
+    z-index: 1;
+}

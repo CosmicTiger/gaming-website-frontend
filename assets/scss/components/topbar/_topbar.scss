@@ -1,0 +1,68 @@
+.Topbar {
+    align-items: center;
+    background-color: $background-dark;
+    display: flex;
+    height: 98px;
+
+    & .ui.grid {
+        margin: 0;
+        padding: 0;
+        & .column {
+            padding: 0;
+        }
+    }
+
+    &-body {
+        &-left {
+            align-items: center;
+            display: flex !important;
+
+            & a > img {
+                height: 50px;
+                @include transition-property-compatibility ($transition: all 0.5s);
+            
+                &:hover {
+                    @include transform-property-compatibility ($transform: translateX(-15px));
+                }
+            }
+        }
+
+        &-right {
+            align-items: center;
+            display: flex !important;
+            justify-content: flex-end;
+
+            & .ui.icon.input > input {
+                padding-right: 5px !important;
+            }
+
+            & .ui.input {
+                align-items: center;
+                margin-right: 25px;
+
+                & input {
+                    background-color: transparent !important;
+                    border: 0;
+                    border-bottom: 2px solid $primary-color !important;
+                    border-radius: 0;
+                    color: $primary-color !important;
+                    font-size: 20px;
+                    padding: 5px 0;
+                    @include transition-property-compatibility(width 0.7s);
+                    width: 220px;
+
+                    &:focus {
+                        width: 350px;
+                    }
+                }
+
+                & i {
+                    color: $primary-color;
+                    opacity: 1 !important;
+                    font-size: 25px;
+                    right: -50px !important;
+                }
+            }
+        }
+    }
+}
