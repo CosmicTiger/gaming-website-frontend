@@ -1,0 +1,20 @@
+.ui.form {
+    .ui.input {
+        input {
+            border: 1px soid $border-grey-light;
+            font-size: 16px;
+        }
+    }
+
+    .actions {
+        align-items: center;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .ui.button.submit {
+        background-color: $primary-color;
+        color: $font-light;
+        margin: 0;
+    }
+}
