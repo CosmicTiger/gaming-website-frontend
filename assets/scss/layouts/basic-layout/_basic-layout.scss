@@ -1,8 +1,19 @@
 .basic-layout {
+    background-image: url("https://gaming-next-ecommerce.s3.amazonaws.com/static/bg-web.jpg");
+    background-size: cover;
+    background-position: center;
     min-height: 100vh;
 
     &-content {
         background-color: $background-grey-light;
-        height: 100vh;
+        -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+        height: calc(100vh - 130px);
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 }
