@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import {
     Container,
     Menu, Grid,
-    Icon, Label } from "semantic-ui-react";
+    Icon } from "semantic-ui-react";
 import Link from 'next/link';
-import BasicModal from "../Modal/BasicModal/BasicModal";
+import BasicModal from "../Modal/BasicModal";
+import Auth from '../Auth';
 
 const MenuPlatforms = () => {
 
@@ -45,8 +46,10 @@ const MenuOptions = (props) => {
 
 const Navbar = () => {
     const [ showModal, setShowModal ] = useState(false);
+    const [ titleModal, setTitleModal ] = useState("Account Login");
 
     const onShowModal = () => setShowModal(true);
+    const onCloseModal = () =>  setShowModal(false);
 
     return (
         <div className="Menu">
@@ -63,9 +66,9 @@ const Navbar = () => {
             <BasicModal 
                 show={showModal} 
                 setShow={setShowModal} 
-                title="Account Login" 
+                title={titleModal} 
                 size="small">
-                <h2>Modal Content</h2>
+                <Auth onCloseModal={onCloseModal} setTitleModal={setTitleModal} />
             </BasicModal>
         </div>
     )
