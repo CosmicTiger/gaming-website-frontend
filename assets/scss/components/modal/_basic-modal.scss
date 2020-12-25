@@ -1,0 +1,24 @@
+.ui.modal.BasicModal {
+    & > .header {
+        align-content: center;
+        background-color: $primary-color;
+        display: flex;
+        justify-content: space-between;
+    
+        .BasicModal-title, .BasicModal-icon {
+            color: $font-light;
+        }
+
+        .BasicModal-icon {
+            align-items: center;
+            display: flex;
+            justify-content: flex-end;
+            font-size: 25px;
+            margin: 0;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
