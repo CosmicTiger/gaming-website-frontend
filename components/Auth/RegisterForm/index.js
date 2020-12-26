@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Form, Button } from 'semantic-ui-react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { toast } from "react-toastify";
 import { registerApi } from "../../../api/user";
 
 function initialValues () {
@@ -26,13 +27,21 @@ function validationSchema () {
 
 const RegisterForm = (props) => {
 
+    const [ loading, setLoading ] = useState(false);
     const { showLoginForm } = props;
 
     const formik = useFormik({
         initialValues: initialValues(),
         validationSchema: Yup.object(validationSchema()),
-        onSubmit: (formData) => {
-            registerApi(formData);
+        onSubmit: async (formData) => {
+            setLoading(true);
+            const response = await registerApi(formData);
+            if(response?.jwt) {
+                showLoginForm();
+            } else {
+                toast.error("Error to register user, try it later");
+            }
+            setLoading(false);
         }
     });
 
@@ -82,7 +91,7 @@ const RegisterForm = (props) => {
                 <Button type="button" basic>
                     Login
                 </Button>
-                <Button type="submit" className="submit">
+                <Button type="submit" className="submit" loading={loading}>
                     Register
                 </Button>
             </div>
