@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Form, Button } from 'semantic-ui-react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { registerApi } from "../../../api/user";
 
 function initialValues () {
     return {
@@ -31,7 +32,7 @@ const RegisterForm = (props) => {
         initialValues: initialValues(),
         validationSchema: Yup.object(validationSchema()),
         onSubmit: (formData) => {
-            console.log(formData);
+            registerApi(formData);
         }
     });
 

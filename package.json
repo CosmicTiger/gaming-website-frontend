@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "eslint": "^7.16.0",
     "formik": "^2.2.6",
     "next": "10.0.2",
     "react": "17.0.1",
