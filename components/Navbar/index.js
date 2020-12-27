@@ -6,6 +6,7 @@ import {
 import Link from 'next/link';
 import BasicModal from "../Modal/BasicModal";
 import Auth from '../Auth';
+import useAuth from "../../hooks/useAuth";
 
 const MenuPlatforms = () => {
 
@@ -48,8 +49,17 @@ const Navbar = () => {
     const [ showModal, setShowModal ] = useState(false);
     const [ titleModal, setTitleModal ] = useState("Account Login");
 
+    const { auth, logout } = useAuth();
+
     const onShowModal = () => setShowModal(true);
     const onCloseModal = () =>  setShowModal(false);
+
+    const showingOptions = () => {
+        return auth ?
+            <button onClick={logout}>Logout</button>
+            :
+            <MenuOptions onShowModal={onShowModal} />
+    }
 
     return (
         <div className="Menu">
@@ -59,7 +69,7 @@ const Navbar = () => {
                         <MenuPlatforms />
                     </Grid.Column>
                     <Grid.Column className="Menu-right" width={10}>
-                        <MenuOptions onShowModal={onShowModal} />
+                        { showingOptions() }
                     </Grid.Column>
                 </Grid>
             </Container>
