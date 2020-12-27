@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 
 import { loginApi } from "../../../api/user";
+import useAuth from "../../../hooks/useAuth";
 
 function initialValues() {
     return {
@@ -23,6 +24,10 @@ function validationSchema() {
 const LoginForm = (props) => {
     const [ loading, setLoading ] = useState(false);
     const { showRegisterForm, onCloseModal } = props;
+    const auth = useAuth();
+
+    console.log(auth);
+
     const formik = useFormik({
         initialValues: initialValues(),
         validationSchema: Yup.object(validationSchema()),

@@ -1,9 +1,19 @@
+import React, { useMemo } from 'react';
 import "../assets/scss/main.scss";
 import { ToastContainer } from "react-toastify";
+import AuthContext from '../context/AuthContext';
 
 function MyApp({ Component, pageProps }) {
+  const authData = useMemo(
+    () => ({
+      auth: { name: "Luisangel", email: "luisangelmarcia@gmail.com" },
+      login: () => null,
+      logout: () => null,
+      setReloadUser: () => null,
+    }), []);
+
   return (
-    <>
+    <AuthContext.Provider value={authData}>
       <Component {...pageProps} />
       <ToastContainer 
         position="top-right"
@@ -16,7 +26,7 @@ function MyApp({ Component, pageProps }) {
         draggable
         pauseOnHover
       />
-    </>
+    </AuthContext.Provider>
   );
 }
 
