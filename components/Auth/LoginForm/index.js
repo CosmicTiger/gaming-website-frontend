@@ -24,9 +24,7 @@ function validationSchema() {
 const LoginForm = (props) => {
     const [ loading, setLoading ] = useState(false);
     const { showRegisterForm, onCloseModal } = props;
-    const auth = useAuth();
-
-    console.log(auth);
+    const { login } = useAuth();
 
     const formik = useFormik({
         initialValues: initialValues(),
@@ -35,7 +33,7 @@ const LoginForm = (props) => {
             setLoading(true);
             const response = await loginApi(formData);
             if (response?.jwt) {
-                console.log(response);
+                login(response.jwt);
                 onCloseModal();
             } else {
                 toast.error("Email or Password are incorrect");
