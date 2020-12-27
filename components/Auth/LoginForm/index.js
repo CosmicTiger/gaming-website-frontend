@@ -4,6 +4,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 
+import { loginApi } from "../../../api/user";
+
 function initialValues() {
     return {
         identifier: "",
@@ -19,13 +21,21 @@ function validationSchema() {
 }
 
 const LoginForm = (props) => {
-    
-    const { showRegisterForm } = props;
+    const [ loading, setLoading ] = useState(false);
+    const { showRegisterForm, onCloseModal } = props;
     const formik = useFormik({
         initialValues: initialValues(),
         validationSchema: Yup.object(validationSchema()),
-        onSubmit: (formData) => {
-            console.log(formData)
+        onSubmit: async (formData) => {
+            setLoading(true);
+            const response = await loginApi(formData);
+            if (response?.jwt) {
+                console.log(response);
+                onCloseModal();
+            } else {
+                toast.error("Email or Password are incorrect");
+            }
+            setLoading(false);
         }
     });
 
@@ -50,7 +60,7 @@ const LoginForm = (props) => {
                     Register
                 </Button>
                 <div className="actionsLogin">
-                    <Button className="submit" type="submit">
+                    <Button className="submit" type="submit" loading={loading}>
                         Login
                     </Button>
                     <Button type="button">
