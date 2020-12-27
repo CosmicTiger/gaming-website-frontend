@@ -22,7 +22,7 @@ function validationSchema() {
 }
 
 const LoginForm = (props) => {
-    const [ loading, setLoading ] = useState(false);
+    const [loading, setLoading] = useState(false);
     const { showRegisterForm, onCloseModal } = props;
     const { login } = useAuth();
 
@@ -44,14 +44,14 @@ const LoginForm = (props) => {
 
     return (
         <Form className="AuthForm Login" onSubmit={formik.handleSubmit}>
-            <Form.Input 
+            <Form.Input
                 name="identifier"
                 type="text"
                 placeholder="Email"
                 onChange={formik.handleChange}
                 error={formik.errors.identifier}
             />
-            <Form.Input 
+            <Form.Input
                 name="password"
                 type="password"
                 placeholder="Password"
