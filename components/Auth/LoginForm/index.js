@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 
-import { loginApi } from "../../../api/user";
+import { loginApi, resetPasswordApi } from "../../../api/user";
 import useAuth from "../../../hooks/useAuth";
 
 function initialValues() {
@@ -42,6 +42,17 @@ const LoginForm = (props) => {
         }
     });
 
+    const resetPassword = () => {
+        formik.setErrors({});
+        const validateEmail = Yup.string().email().required();
+
+        if(!validateEmail.isValidSync(formik.values.identifier)) {
+            formik.setErrors({ identifier: true });
+        } else {
+            resetPasswordApi(formik.values.identifier);
+        }
+    }
+
     return (
         <Form className="AuthForm Login" onSubmit={formik.handleSubmit}>
             <Form.Input
@@ -66,7 +77,7 @@ const LoginForm = (props) => {
                     <Button className="submit" type="submit" loading={loading}>
                         Login
                     </Button>
-                    <Button type="button">
+                    <Button type="button" onClick={resetPassword}>
                         Have you forgotten your password?
                     </Button>
                 </div>
