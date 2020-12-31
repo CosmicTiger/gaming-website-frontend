@@ -3,6 +3,7 @@ import { Form, Button } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import { updatePasswordApi } from "../../../api/user";
 
 function initialValues() {
     return {
@@ -29,8 +30,16 @@ const ChangePasswordForm = (props) => {
     const formik = useFormik({
         initialValues: initialValues(),
         validationSchema: Yup.object(validationSchema()),
-        onSubmit: (formData) => {
-            console.log(formData);
+        onSubmit: async (formData) => {
+            setLoading(true);
+            const response = await updatePasswordApi(user.id, formData.password, logout);
+            if(!response) {
+                toast.error("Error updating password")
+            } else {
+                toast.success("Password has been updated successfully, please login again");
+                logout();
+            }
+            setLoading(false);
         },
     })
 
