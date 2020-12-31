@@ -58,7 +58,13 @@ const ChangeNameForm = (props) => {
                         error={formik.errors.lastName}
                         />
                 </Form.Group>
-                <Button className="submit" type="submit">Update</Button>
+                <Button 
+                    className="submit" 
+                    type="submit" 
+                    loading={loading}
+                    >
+                    Update
+                </Button>
             </Form>
         </div>
     )
