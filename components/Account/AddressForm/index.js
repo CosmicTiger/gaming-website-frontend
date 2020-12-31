@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Button } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import useAuth from "../../../hooks/useAuth";
+import { createAddressApi } from "../../../api/address";
 
 function initialValues() {
     return {
@@ -27,15 +29,34 @@ function validationSchema() {
     }
 }
 
-const AddressForm = () => {
-
+const AddressForm = (props) => {
+    const [ loading, setLoading ] = useState(false);
+    const { setShowModal } = props;
+    const { auth, logout } = useAuth();
     const formik = useFormik({
         initialValues: initialValues(),
         validationSchema: Yup.object(validationSchema()),
         onSubmit: (formData) => {
-            console.log(formData);
+            createAddress(formData);
         }
-    })
+    });
+
+    const createAddress = async (formData) => {
+        setLoading(true);
+        const formDataTemp = {
+            ...formData,
+            user: auth.idUser
+        };
+        const response = await createAddressApi(formDataTemp, logout);
+        if(!response) {
+            toast.warning("Error creating address");
+            setLoading(false);
+        } else {
+            formik.resetForm();
+            setLoading(false);
+            setShowModal(false);
+        }
+    }
 
     return (
         <Form onSubmit={formik.handleSubmit}>
@@ -110,7 +131,7 @@ const AddressForm = () => {
                 />
             </Form.Group>
             <div className="actions">
-                <Button className="submit" type="submit">
+                <Button className="submit" type="submit" loading={loading}>
                     Create Address
                 </Button>
             </div>

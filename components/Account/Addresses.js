@@ -3,14 +3,14 @@ import { Icon } from "semantic-ui-react";
 import BasicModal from "../Modal/BasicModal";
 import AddressForm from "./AddressForm";
 
-const Addresses = () => {
+const Addresses = (props) => {
     const [ showModal, setShowModal ] = useState(false);
     const [ titleModal, setTitleModal ] = useState("");
     const [ formModal, setFormModal ] = useState(null);
 
     const openModal = (title) => {
         setTitleModal(title);
-        setFormModal(<AddressForm />);
+        setFormModal(<AddressForm setShowModal={setShowModal}/>);
         setShowModal(true);
     }
 
