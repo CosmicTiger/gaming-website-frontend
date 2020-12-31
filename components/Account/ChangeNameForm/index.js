@@ -21,7 +21,7 @@ function validationSchema() {
 
 const ChangeNameForm = (props) => {
     const [ loading, setLoading ] = useState(false);
-    const { user, logout } = props;
+    const { user, logout, setReloadUser } = props;
     const formik = useFormik({
         initialValues: initialValues(user.name, user.lastName),
         validationSchema: Yup.object(validationSchema()),
@@ -29,9 +29,10 @@ const ChangeNameForm = (props) => {
             setLoading(true);
             const response = await updateNameApi(user.id, formData, logout);
             if(!response) {
-                toast.error("Error while updating the name and last name");
+                toast.error("Error updating the name and last name");
             } else {
-                console.log("Name and last name has been updated");
+                setReloadUser(true);
+                toast.success("Successfully updated the name and last name");
             }
             setLoading(false);
         }

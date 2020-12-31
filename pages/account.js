@@ -7,7 +7,7 @@ import Configuration from "../components/Account/Configuration";
 
 const Account = () => {
     const [user, setUser] = useState(undefined);
-    const { auth, logout } = useAuth();
+    const { auth, logout, setReloadUser } = useAuth();
     const router = useRouter();
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const Account = () => {
 
     return (
         <BasicLayout className="Account">
-            <Configuration user={user} logout={logout}/>
+            <Configuration user={user} logout={logout} setReloadUser={setReloadUser} />
         </BasicLayout>
     )
 }
