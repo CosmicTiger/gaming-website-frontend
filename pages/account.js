@@ -4,6 +4,7 @@ import BasicLayout from '../layouts/BasicLayout';
 import useAuth from "../hooks/useAuth";
 import { getMeApi } from "../api/user";
 import Configuration from "../components/Account/Configuration";
+import Addresses from "../components/Account/Addresses";
 
 const Account = () => {
     const [user, setUser] = useState(undefined);
@@ -26,6 +27,7 @@ const Account = () => {
     return (
         <BasicLayout className="Account">
             <Configuration user={user} logout={logout} setReloadUser={setReloadUser} />
+            <Addresses />
         </BasicLayout>
     )
 }
