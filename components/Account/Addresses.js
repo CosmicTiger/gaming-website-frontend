@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Icon } from "semantic-ui-react";
 import BasicModal from "../Modal/BasicModal";
 import AddressForm from "./AddressForm";
+import AddressList from "./AddressList";
 
 const Addresses = (props) => {
     const [ showModal, setShowModal ] = useState(false);
@@ -25,7 +26,7 @@ const Addresses = (props) => {
                 <Icon name="plus" link onClick={newAddress} />
             </div>
             <div className="data">
-                <p>List of addresses....</p>
+                <AddressList />
             </div>
 
             <BasicModal show={showModal} setShow={setShowModal} title={titleModal}>

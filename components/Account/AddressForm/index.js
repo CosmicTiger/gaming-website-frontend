@@ -45,7 +45,7 @@ const AddressForm = (props) => {
         setLoading(true);
         const formDataTemp = {
             ...formData,
-            user: auth.idUser
+            users_permissions_user: auth.idUser
         };
         const response = await createAddressApi(formDataTemp, logout);
         if(!response) {
