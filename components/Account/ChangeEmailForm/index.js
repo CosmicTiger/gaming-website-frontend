@@ -3,6 +3,7 @@ import { Form, Button } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import { updateEmailApi } from "../../../api/user";
 
 function initialValues() {
     return {
@@ -31,8 +32,17 @@ const ChangeEmailForm = (props) => {
     const formik = useFormik({
         initialValues: initialValues(),
         validationSchema: Yup.object(validationSchema()),
-        onSubmit: (formData) => {
-            console.log(formData);
+        onSubmit: async (formData) => {
+            setLoading(true);
+            const response = await updateEmailApi(user.id, formData.email, logout);
+            if(!response || response?.statusCode === 400) {
+                toast.error("Error while updating email");
+            } else {
+                setReloadUser(true);
+                toast.success("Email updated successfully");
+                formik.handleReset();
+            }
+            setLoading(false);
         }
     });
 
