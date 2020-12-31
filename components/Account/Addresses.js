@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Icon } from "semantic-ui-react";
 import BasicModal from "../Modal/BasicModal";
+import AddressForm from "./AddressForm";
 
 const Addresses = () => {
     const [ showModal, setShowModal ] = useState(false);
@@ -9,26 +10,26 @@ const Addresses = () => {
 
     const openModal = (title) => {
         setTitleModal(title);
-        setFormModal(<h1>New Address...</h1>);
+        setFormModal(<AddressForm />);
         setShowModal(true);
     }
 
-    const newRoute = () => {
-        openModal("New Route");
+    const newAddress = () => {
+        openModal("New Address");
     }
 
     return (
         <div className="Account-addresses">
             <div className="title">
-                Routes
-                <Icon name="plus" link onClick={newRoute} />
+                Addresses
+                <Icon name="plus" link onClick={newAddress} />
             </div>
             <div className="data">
-                <p>List of routes....</p>
+                <p>List of addresses....</p>
             </div>
 
             <BasicModal show={showModal} setShow={setShowModal} title={titleModal}>
-                <p>Add - Update Form</p>
+                { formModal }
             </BasicModal>
         </div>
     )
