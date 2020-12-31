@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Button } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import { updateNameApi } from "../../../api/user";
 
 function initialValues(name, lastName) {
     return {
@@ -19,13 +20,20 @@ function validationSchema() {
 }
 
 const ChangeNameForm = (props) => {
-
-    const { user } = props;
+    const [ loading, setLoading ] = useState(false);
+    const { user, logout } = props;
     const formik = useFormik({
         initialValues: initialValues(user.name, user.lastName),
         validationSchema: Yup.object(validationSchema()),
-        onSubmit: (formData) => {
-            console.log(formData);
+        onSubmit: async (formData) => {
+            setLoading(true);
+            const response = await updateNameApi(user.id, formData, logout);
+            if(!response) {
+                toast.error("Error while updating the name and last name");
+            } else {
+                console.log("Name and last name has been updated");
+            }
+            setLoading(false);
         }
     });
 

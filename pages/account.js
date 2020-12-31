@@ -25,7 +25,7 @@ const Account = () => {
 
     return (
         <BasicLayout className="Account">
-            <Configuration user={user} />
+            <Configuration user={user} logout={logout}/>
         </BasicLayout>
     )
 }
