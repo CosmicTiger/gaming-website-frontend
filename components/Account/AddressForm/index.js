@@ -16,6 +16,7 @@ const AddressForm = () => {
                     name="name"
                     type="text"
                     label="Name and Last Name"
+                    placeholder="Name and Last Name"
                 />
                 <Form.Input 
                     name="address"
@@ -54,7 +55,7 @@ const AddressForm = () => {
             </Form.Group>
             <div className="actions">
                 <Button className="submit" type="submit">
-                    Create address
+                    Create Address
                 </Button>
             </div>
         </Form>
