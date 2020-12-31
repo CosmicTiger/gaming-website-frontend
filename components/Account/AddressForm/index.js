@@ -34,8 +34,8 @@ const AddressForm = () => {
                 <Form.Input 
                     name="state"
                     type="text"
-                    label="Estado/Provincia/Región"
-                    placeholder="Estado/Provincia/Región"
+                    label="State/Province/Region"
+                    placeholder="State/Province/Region"
                 />
             </Form.Group>
             <Form.Group widths="equal">
