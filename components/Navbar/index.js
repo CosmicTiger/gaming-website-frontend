@@ -6,31 +6,28 @@ import {
     Icon
 } from "semantic-ui-react";
 import Link from 'next/link';
+import { map } from 'lodash';
 import BasicModal from "../Modal/BasicModal";
 import Auth from '../Auth';
 import useAuth from "../../hooks/useAuth";
 import { getMeApi } from "../../api/user";
 import { getPlatformsApi } from "../../api/platform";
 
-const MenuPlatforms = () => {
+const MenuPlatforms = (props) => {
+
+    const { platforms } = props;
 
     return (
         <Menu>
-            <Link href="/play-station">
-                <Menu.Item as="a">
-                    PlayStation
-                </Menu.Item>
-            </Link>
-            <Link href="/xbox">
-                <Menu.Item as="a">
-                    Xbox
-                </Menu.Item>
-            </Link>
-            <Link href="/switch">
-                <Menu.Item as="a">
-                    Nintendo Switch
-                </Menu.Item>
-            </Link>
+            {map(platforms, (platform) => {
+                return (
+                <Link href={`/games/${platform.url}`} key={platform._id}>
+                    <Menu.Item as="a" name={platform.url}>
+                        { platform.title }
+                    </Menu.Item>
+                </Link>
+                )
+            })}
         </Menu>
     );
 }
@@ -117,7 +114,7 @@ const Navbar = () => {
             <Container>
                 <Grid>
                     <Grid.Column className="Menu-left" width={6}>
-                        <MenuPlatforms />
+                        <MenuPlatforms platforms={platforms} />
                     </Grid.Column>
                     <Grid.Column className="Menu-right" width={10}>
                         {showingOptions()}
