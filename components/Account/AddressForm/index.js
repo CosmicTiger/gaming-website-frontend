@@ -31,7 +31,7 @@ function validationSchema() {
 
 const AddressForm = (props) => {
     const [ loading, setLoading ] = useState(false);
-    const { setShowModal } = props;
+    const { setShowModal, setReloadAddressess } = props;
     const { auth, logout } = useAuth();
     const formik = useFormik({
         initialValues: initialValues(),
@@ -53,6 +53,7 @@ const AddressForm = (props) => {
             setLoading(false);
         } else {
             formik.resetForm();
+            setReloadAddressess(true);
             setLoading(false);
             setShowModal(false);
         }

@@ -1,3 +1,31 @@
 .AddressList {
+    padding: 10px;
 
+    .Address {
+        border: 1px solid $border-grey-light;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px 0 10px 0;
+
+        &-title, &-name, &-address, 
+        &-location, &-phone {
+            margin-bottom: 5px;
+        }
+
+        &-title {
+            border-bottom: 1px solid $border-grey-light;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .actions {
+            margin-top: 20px;
+
+            .ui.button.primary {
+                background-color: $primary-color;
+                color: $font-light;
+            }
+        }
+    }
 }
