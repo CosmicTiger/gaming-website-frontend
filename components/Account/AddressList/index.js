@@ -6,7 +6,7 @@ import useAuth from "../../../hooks/useAuth";
 
 import AddressCard from "../AddressCard";
 
-function renderingAddress(addresses, logout, setReloadAddressess) {
+function renderingAddress(addresses, logout, setReloadAddressess, openModal) {
 
     if (size(addresses) === 0) {
         return <h3>There's no address</h3>
@@ -20,6 +20,7 @@ function renderingAddress(addresses, logout, setReloadAddressess) {
                                 address={address} 
                                 logout={logout} 
                                 setReloadAddressess={setReloadAddressess} 
+                                openModal={openModal}
                                 />
                         </Grid.Column>)
                 })}
@@ -31,7 +32,7 @@ function renderingAddress(addresses, logout, setReloadAddressess) {
 const AddressList = (props) => {
     const [addresses, setAddresses] = useState(null);
     const { auth, logout } = useAuth();
-    const { reloadAddresses, setReloadAddressess } = props;
+    const { reloadAddresses, setReloadAddressess, openModal } = props;
 
     useEffect(() => {
         (async () => {
@@ -45,7 +46,7 @@ const AddressList = (props) => {
 
     return (
         <div className="AddressList">
-            { renderingAddress(addresses, logout, setReloadAddressess) }
+            { renderingAddress(addresses, logout, setReloadAddressess, openModal) }
         </div>
     )
 }

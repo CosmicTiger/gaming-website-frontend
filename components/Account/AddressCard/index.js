@@ -4,7 +4,7 @@ import { deleteAddressApi } from '../../../api/address';
 
 const AddressCard = (props) => {
     const [ loading, setLoading ] = useState(false);
-    const { address, logout, setReloadAddressess } = props;
+    const { address, logout, setReloadAddressess, openModal } = props;
 
     const deleteAddress = async () => {
         setLoading(true);
@@ -12,6 +12,8 @@ const AddressCard = (props) => {
         if (response) setReloadAddressess(true);
         setLoading(false);
     }
+
+    const triggeringOpenModal = () => openModal(`Editing: ${address.title}`, address);
 
     return (
         <div className="Address">
@@ -31,7 +33,12 @@ const AddressCard = (props) => {
                 { address.phone }
             </p>
             <div className="actions">
-                <Button primary>Edit</Button>
+                <Button 
+                    primary
+                    onClick={triggeringOpenModal}    
+                >
+                Edit
+                </Button>
                 <Button 
                     onClick={deleteAddress}
                     loading={loading}

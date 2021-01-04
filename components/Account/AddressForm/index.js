@@ -5,15 +5,15 @@ import * as Yup from "yup";
 import useAuth from "../../../hooks/useAuth";
 import { createAddressApi } from "../../../api/address";
 
-function initialValues() {
+function initialValues(address) {
     return {
-        title: "",
-        name: "",
-        address: "",
-        city: "",
-        state: "",
-        zipCode: "",
-        phone: ""
+        title: address?.title || "",
+        name: address?.name || "",
+        address: address?.address || "",
+        city: address?.city || "",
+        state: address?.state || "",
+        zipCode: address?.zipCode || "",
+        phone: address?.phone || ""
     }
 }
 
@@ -31,13 +31,15 @@ function validationSchema() {
 
 const AddressForm = (props) => {
     const [ loading, setLoading ] = useState(false);
-    const { setShowModal, setReloadAddressess } = props;
+    const { setShowModal, setReloadAddressess, newAddress, address } = props;
     const { auth, logout } = useAuth();
     const formik = useFormik({
-        initialValues: initialValues(),
+        initialValues: initialValues(address),
         validationSchema: Yup.object(validationSchema()),
         onSubmit: (formData) => {
-            createAddress(formData);
+            newAddress ? 
+                createAddress(formData) : 
+                updateAddress(formData)
         }
     });
 
@@ -57,6 +59,10 @@ const AddressForm = (props) => {
             setLoading(false);
             setShowModal(false);
         }
+    }
+
+    const updateAddress = (formData) => {
+        console.log('Updating Address');
     }
 
     return (
@@ -133,7 +139,7 @@ const AddressForm = (props) => {
             </Form.Group>
             <div className="actions">
                 <Button className="submit" type="submit" loading={loading}>
-                    Create Address
+                    { newAddress ? "Create Address" : "Update Address" }
                 </Button>
             </div>
         </Form>
