@@ -10,6 +10,7 @@ import BasicModal from "../Modal/BasicModal";
 import Auth from '../Auth';
 import useAuth from "../../hooks/useAuth";
 import { getMeApi } from "../../api/user";
+import { getPlatformsApi } from "../../api/platform";
 
 const MenuPlatforms = () => {
 
@@ -81,6 +82,7 @@ const MenuOptions = (props) => {
 }
 
 const Navbar = () => {
+    const [platforms, setPlatforms] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [titleModal, setTitleModal] = useState("Account Login");
     const [user, setUser] = useState(undefined);
@@ -93,6 +95,13 @@ const Navbar = () => {
             setUser(response);
         })();
     }, [auth]);
+
+    useEffect(() => {
+        (async () => {
+            const response = await getPlatformsApi();
+            setPlatforms(response || []);
+        })();
+    }, []);
 
     const onShowModal = () => setShowModal(true);
     const onCloseModal = () => setShowModal(false);
