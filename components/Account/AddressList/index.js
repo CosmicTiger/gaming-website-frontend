@@ -6,7 +6,7 @@ import useAuth from "../../../hooks/useAuth";
 
 import AddressCard from "../AddressCard";
 
-function renderingAddress(addresses) {
+function renderingAddress(addresses, logout, setReloadAddressess) {
 
     if (size(addresses) === 0) {
         return <h3>There's no address</h3>
@@ -16,7 +16,11 @@ function renderingAddress(addresses) {
                 {map(addresses, (address) => {
                     return (
                         <Grid.Column key={address.id} mobile={16} tablet={8} computer={4}>
-                            <AddressCard address={address} />
+                            <AddressCard 
+                                address={address} 
+                                logout={logout} 
+                                setReloadAddressess={setReloadAddressess} 
+                                />
                         </Grid.Column>)
                 })}
             </Grid>
@@ -41,7 +45,7 @@ const AddressList = (props) => {
 
     return (
         <div className="AddressList">
-            { renderingAddress(addresses) }
+            { renderingAddress(addresses, logout, setReloadAddressess) }
         </div>
     )
 }

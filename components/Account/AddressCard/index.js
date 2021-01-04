@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from "semantic-ui-react";
+import { deleteAddressApi } from '../../../api/address';
 
 const AddressCard = (props) => {
-    
-    const { address } = props;
+    const [ loading, setLoading ] = useState(false);
+    const { address, logout, setReloadAddressess } = props;
+
+    const deleteAddress = async () => {
+        setLoading(true);
+        const response = await deleteAddressApi(address._id, logout);
+        if (response) setReloadAddressess(true);
+        setLoading(false);
+    }
 
     return (
         <div className="Address">
@@ -24,7 +32,12 @@ const AddressCard = (props) => {
             </p>
             <div className="actions">
                 <Button primary>Edit</Button>
-                <Button>Delete</Button>
+                <Button 
+                    onClick={deleteAddress}
+                    loading={loading}
+                >
+                Delete
+                </Button>
             </div>
         </div>
     )
