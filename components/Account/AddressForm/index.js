@@ -3,7 +3,7 @@ import { Form, Button } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import useAuth from "../../../hooks/useAuth";
-import { createAddressApi } from "../../../api/address";
+import { createAddressApi, updateAddressApi } from "../../../api/address";
 
 function initialValues(address) {
     return {
@@ -61,8 +61,22 @@ const AddressForm = (props) => {
         }
     }
 
-    const updateAddress = (formData) => {
-        console.log('Updating Address');
+    const updateAddress = async (formData) => {
+        setLoading(true);
+        const formDataTemp = {
+            ...formData,
+            users_permissions_user: auth.idUser
+        };
+        const response = await updateAddressApi(address._id, formDataTemp, logout);
+        if(!response ) {
+            toast.warning("Updating Address Error");
+            setLoading(false);
+        } else {
+            formik.resetForm();
+            setReloadAddressess(true);
+            setLoading(false);
+            setShowModal(false);
+        }
     }
 
     return (
