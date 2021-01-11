@@ -1,0 +1,69 @@
+.ListGames {
+    &-cardGame {
+        padding: 15px;
+        &:hover {
+            opacity: 0.9;
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+
+    &-gamePoster {
+        position: relative;
+
+        &--info {
+            align-items: flex-end;
+            bottom: 0;
+            // box-shadow: inset 0 -43px 15px -22px rgba(0,0,0,0.75);
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            height: 50px;
+            position: relative;
+            top: -22px;
+            width: 100%;
+        }
+
+        &--info .discount {
+            background-color: $success;
+            color: $font-light;
+            font-size: 13px;
+            padding: 1px 6px;
+
+        }
+
+        &--info .price {
+            background-color: $primary-color;
+            color: $font-light;
+            font-size: 18px;
+            padding: 1px 6px;
+        }
+
+        &--info .title {
+            color: $font-grey;
+            margin-top: 5px;
+            padding: 0 10px;
+            text-align: center;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        &--info .title h2 {
+            font-size: 16px;
+        }
+    }
+}
+
+[data-discount]::before {
+    content: attr(data-discount) "%";
+    display: inline-block;
+}
+
+[data-price]::before {
+    content: "$" attr(data-price);
+    display: inline-block;
+}
