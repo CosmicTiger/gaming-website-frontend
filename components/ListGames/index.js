@@ -30,7 +30,7 @@ const ListGames = (props) => {
         <div className="ListGames">
             <Grid>
                 <Grid.Row columns={getColumnRender()}>
-                    { map(games, (game) => {
+                    { games && map(games, (game) => {
                         return <CardGame key={game._id} game={game} />
                     })}
                 </Grid.Row>

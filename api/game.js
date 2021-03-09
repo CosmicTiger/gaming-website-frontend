@@ -22,8 +22,8 @@ export async function getGamesPlatformApi(platform, limit, start) {
         const url = `${BASE_PATH}/games?platform.url=${platform}&${limitItems}&${sortItems}&${startItems}`;
         const response = await fetch(url);
         const result = await response.json();
+        console.log(result);
         return result;
-
     } catch (error) {
         console.log(error);
         return null;
